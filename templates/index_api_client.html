@@ -30,8 +30,8 @@
             str = "off"
         else
             str = "on"
-        $("input[type=range].pumpState").val(str);
-        $("#pumpState").html(data.level);
+        $("input[type=range].pumpState").val(data.level);
+        $("#pumpState").html(str);
     }
 
 
