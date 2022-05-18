@@ -16,15 +16,15 @@ from flask_restful import Resource, Api, reqparse, inputs
 
 # Global variables
 WATER_PUMP = 7
-HUMIDITY_SENSOR = 40
-# MOISTURE_SENSOR = X
-state = {                                                                            # (6)
+#HUMIDITY_SENSOR = 40
+#MOISTURE_SENSOR = 11
+state = {
     'level': 0 	# state of the water pump.
 }
 
 GPIO.setmode(GPIO.BOARD)
-#GPIO.setup(humidity_sensor, GPIO.IN)
 GPIO.setup(WATER_PUMP, GPIO.OUT)
+#GPIO.setup(humidity_sensor, GPIO.IN)
 
 
 
@@ -66,9 +66,9 @@ class PumpControl(Resource):  # (10)
 
     def post(self):
         """Handles HTTP POST requests to set water pump level."""
-        global state                                                                 # (14)
+        global state
 
-        args = self.args_parser.parse_args()                                         # (15)
+        args = self.args_parser.parse_args()
 
         state['level'] = args.level
         GPIO.output(WATER_PUMP, state['level'])
@@ -76,7 +76,7 @@ class PumpControl(Resource):  # (10)
 
 
 # Register Flask-RESTful resource and mount to server end point /led
-api.add_resource(PumpControl, '/led')                                                 # (19)
+api.add_resource(PumpControl, '/pump')
 
 
 if __name__ == '__main__':
