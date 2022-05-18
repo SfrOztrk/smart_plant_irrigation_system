@@ -1,22 +1,22 @@
 import RPi.GPIO as GPIO
 import time
 
-humidity_sensor = 11
-water_pump = 7
+MOISTURE_SENSOR = 11
+WATER_PUMP = 7
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(humidity_sensor, GPIO.IN)
-GPIO.setup(water_pump, GPIO.OUT)
+GPIO.setup(MOISTURE_SENSOR, GPIO.IN)
+GPIO.setup(WATER_PUMP, GPIO.OUT)
 
 try:
 	while True:
-		humidity_value = GPIO.input(humidity_sensor)
+		moisture_value = GPIO.input(MOISTURE_SENSOR)
 
-		if humidity_value == 0:
-			GPIO.output(water_pump, True)
+		if moisture_value == 0:
+			GPIO.output(WATER_PUMP, True)
 			print("The soil is dry. The water pump started to pump water!")
 		else:
-			GPIO.output(water_pump, False)
+			GPIO.output(WATER_PUMP, False)
 			print("The soil is wet. The water pump stopped pumping water!")
 		time.sleep(0.5)
 
