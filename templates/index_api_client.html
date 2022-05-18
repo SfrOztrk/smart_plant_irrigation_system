@@ -39,11 +39,16 @@
         // Event listener for Slider value changes.
         // .on('input', ...) will fire as the slider changes (= lots of network traffic). Change to
         // .on('change', ...) to fire only after mouse button is released.
-        $("input[type=button].pumpState").on('click', function() {
-               pump_state = $(this).val();
-               payload = { "level": pump_state }
-               postUpdate(payload);
-            });
+        $("input[type=button].pumpState").on('click', function() {   
+            pump_state = $(this).val();
+            if (pump_state == "Off")
+                payload = { "level": 0 }
+            else
+                payload = { "level": 1 }
+            
+            postUpdate(payload);
+            }
+        );
 
         // Initialise slider value form state on server.
         getState() 
