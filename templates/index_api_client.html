@@ -27,10 +27,10 @@
     function updateControls(data) {
         str = "";
         if (data.level == 0) 
-            str = "off"
+            str = "Off"
         else
-            str = "on"
-        $("input[type=range].pumpState").val(data.level);
+            str = "On"
+        $("input[type=button].pumpState").val(str);
         $("#pumpState").html(str);
     }
 
@@ -39,14 +39,14 @@
         // Event listener for Slider value changes.
         // .on('input', ...) will fire as the slider changes (= lots of network traffic). Change to
         // .on('change', ...) to fire only after mouse button is released.
-        $("input[type=range].pumpState").on('input', function() {        // (7)
-               pump_state = $(this).val();                               // (8)
-               payload = { "level": pump_state }                         // (9)
+        $("input[type=button].pumpState").on('click', function() {
+               pump_state = $(this).val();
+               payload = { "level": pump_state }
                postUpdate(payload);
             });
 
         // Initialise slider value form state on server.
-        getState()                                                             // (10)
+        getState() 
     });
 
     </script>
@@ -54,10 +54,12 @@
 </head>
 
 <body>
+
     <h1>Flask RESTful API Example</h1>
-    LED is connected to GPIO {{pin}}<br>                                      <!--(11)-->
-    Irrigation: <span id="pumpState"></span>%<br>
-    <input type="range" min="0" max="1" value="0" class="pumpState">  <!--(12)-->
+    LED is connected to GPIO {{pin}}<br>
+    Irrigation: <span id="pumpState"></span><br>
+    <input type="button" value="Off" class="pumpState">
+
 </body>
 
 </html>
