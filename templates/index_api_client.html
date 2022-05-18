@@ -25,8 +25,8 @@
 
 
     function updateControls(data) {
-        $("input[type=range].brightnessLevel").val(data.level);                // (6)
-        $("#brightnessLevel").html(data.level);
+        $("input[type=range].pumpState").val(data.level);                // (6)
+        $("#pumpState").html(data.level);
     }
 
 
@@ -34,9 +34,9 @@
         // Event listener for Slider value changes.
         // .on('input', ...) will fire as the slider changes (= lots of network traffic). Change to
         // .on('change', ...) to fire only after mouse button is released.
-        $("input[type=range].brightnessLevel").on('input', function() {        // (7)
-               brightness_level = $(this).val();                               // (8)
-               payload = { "level": brightness_level }                         // (9)
+        $("input[type=range].pumpState").on('input', function() {        // (7)
+               pump_state = $(this).val();                               // (8)
+               payload = { "level": pump_state }                         // (9)
                postUpdate(payload);
             });
 
@@ -51,8 +51,8 @@
 <body>
     <h1>Flask RESTful API Example</h1>
     LED is connected to GPIO {{pin}}<br>                                      <!--(11)-->
-    Brightness: <span id="brightnessLevel"></span>%<br>
-    <input type="range" min="0" max="1" value="0" class="brightnessLevel">  <!--(12)-->
+    Irrigation: <span id="pumpState"></span>%<br>
+    <input type="range" min="0" max="1" value="0" class="pumpState">  <!--(12)-->
 </body>
 
 </html>
