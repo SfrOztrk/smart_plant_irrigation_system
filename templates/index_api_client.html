@@ -16,16 +16,21 @@
 
 
     // POST Request to server to set water pump state.
-    function postUpdate(payload) {                                             // (4)
+    function postUpdate(payload) {
         $.post("/pump", payload, function(serverResponse, status) {
-            console.log(serverResponse)
-            updateControls(serverResponse);                                    // (5)
+            console.log(serverResponse);
+            updateControls(serverResponse);
         });
     }
 
 
     function updateControls(data) {
-        $("input[type=range].pumpState").val(data.level);                // (6)
+        str = "";
+        if (data.level == 0) 
+            str = "off"
+        else
+            str = "on"
+        $("input[type=range].pumpState").val(str);
         $("#pumpState").html(data.level);
     }
 
