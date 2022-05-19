@@ -47,10 +47,12 @@ def index():
 @app.route('/autoOn', methods = ['POST'])
 def auto_on():
     auto = True
+    return state
 
 @app.route('/autoOff', methods = ['POST'])
 def auto_off():
     auto = False
+    return state
 
 # Flask-restful resource definitions.
 # A 'resource' is modeled as a Python Class.
@@ -99,7 +101,7 @@ if __name__ == '__main__':
 
     try:
         while True:
-            if (auto == True):
+            if (auto == 1):
                 moisture_value = GPIO.input(MOISTURE_SENSOR)
                 if (moisture_value == 0):  # dry
                     state['level'] = 0     # on
@@ -109,8 +111,7 @@ if __name__ == '__main__':
                     state['level'] = 1   # off
                     GPIO.output(WATER_PUMP, 1)
                     print("The soil is wet. The water pump stopped pumping water!")
-                time.sleep(1)
-                PumpControl.get(self=this)
+            time.sleep(1)
 
     finally:
         print("\nSystem has been stopped")
