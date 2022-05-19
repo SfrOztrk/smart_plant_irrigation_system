@@ -21,8 +21,7 @@ WATER_PUMP = 7
 #HUMIDITY_SENSOR = 40
 MOISTURE_SENSOR = 11
 state = {
-    'level': 1, 	# state of the water pump. 1:off, 0:on
-    'auto': 0
+    'level': 1	# state of the water pump. 1:off, 0:on
 }
 
 GPIO.setmode(GPIO.BOARD)
@@ -81,7 +80,6 @@ class PumpControl(Resource):
         args = self.args_parser.parse_args()
 
         state['level'] = args.level
-        state['auto'] = args.auto
         GPIO.output(WATER_PUMP, state['level'])
         return state
 
