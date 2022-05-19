@@ -45,11 +45,11 @@ def index():
     return render_template('index_api_client.html', pin=WATER_PUMP)
 
 @app.route('/autoOn', methods = ['POST'])
-def update_text():
+def auto_on():
     auto = True
 
 @app.route('/autoOff', methods = ['POST'])
-def update_text():
+def auto_off():
     auto = False
 
 # Flask-restful resource definitions.
@@ -111,6 +111,7 @@ if __name__ == '__main__':
                     print("The soil is wet. The water pump stopped pumping water!")
                 time.sleep(1)
                 PumpControl.get(self=this)
+
     finally:
         print("\nSystem has been stopped")
         GPIO.cleanup()
