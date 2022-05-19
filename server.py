@@ -49,7 +49,7 @@ def auto_on():
     auto = True
     try:
         while True:
-            if (auto == 1):
+            if (auto):
                 moisture_value = GPIO.input(MOISTURE_SENSOR)
                 if (moisture_value == 0):  # dry
                     state['level'] = 0     # on
@@ -59,12 +59,14 @@ def auto_on():
                     state['level'] = 1   # off
                     GPIO.output(WATER_PUMP, 1)
                     print("The soil is wet. The water pump stopped pumping water!")
+            else:
+                return state
+
             time.sleep(1)
 
     finally:
         print("\nSystem has been stopped")
         GPIO.cleanup()
-    return state
 
 @app.route('/autoOff', methods = ['POST'])
 def auto_off():
