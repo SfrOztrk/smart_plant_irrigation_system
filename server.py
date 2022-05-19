@@ -21,7 +21,8 @@ WATER_PUMP = 7
 MOISTURE_SENSOR = 11
 auto = False
 state = {
-    'level': 1 	# state of the water pump. 1:off, 0:on
+    'level': 1, 	# state of the water pump. 1:off, 0:on
+    'moisture': 0
 }
 
 GPIO.setmode(GPIO.BOARD)
@@ -45,9 +46,9 @@ def index():
     relative to this Python file."""
     return render_template('index_api_client.html', pin=WATER_PUMP)
 
-@app.route('/autoOn', methods = ['POST'])
-def auto_on():
-    auto = True
+@app.route('/auto', methods = ['POST'])
+def auto():
+
     try:
         while auto:
             moisture_value = GPIO.input(MOISTURE_SENSOR)
@@ -65,6 +66,7 @@ def auto_on():
     finally:
         print("\nSystem has been stopped")
         GPIO.cleanup()
+
 
 @app.route('/autoOff', methods = ['POST'])
 def auto_off():

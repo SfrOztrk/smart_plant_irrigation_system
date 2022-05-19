@@ -84,19 +84,12 @@
 
         // POST Request to server to set water pump state.
         function postAutoOn() {
-            $.post("/autoOn", payload, function(serverResponse, status) {
+            $.post("/auto/<int:num>", payload, function(serverResponse, status) {
                 console.log(serverResponse);
                 updateControls(serverResponse);
             });
         }
 
-        // POST Request to server to set water pump state.
-        function postAutoOff() {
-            $.post("/autoOff",payload, function(serverResponse, status) {
-                console.log(serverResponse);
-                updateControls(serverResponse);
-            });
-        }
 
 
         function updateControls(data) {
