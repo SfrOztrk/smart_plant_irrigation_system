@@ -19,7 +19,7 @@ WATER_PUMP = 7
 #HUMIDITY_SENSOR = 40
 #MOISTURE_SENSOR = 11
 state = {
-    'level': 0 	# state of the water pump.
+    'level': 1 	# state of the water pump. 1:off, 0:on
 }
 
 GPIO.setmode(GPIO.BOARD)

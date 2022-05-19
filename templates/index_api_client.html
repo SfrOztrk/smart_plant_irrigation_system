@@ -85,10 +85,14 @@
 
         function updateControls(data) {
             str = "";
-            if (data.level == 1) 
+            if (data.level == 1) {
                 str = "Off"
-            else
+                $("input[type=checkbox].off-on").prop("checked", false)
+            }
+            else {
+                $("input[type=checkbox].off-on").prop("checked", true)
                 str = "On"
+            }
 
             $("#pumpState").html(str);
         }
