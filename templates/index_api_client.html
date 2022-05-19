@@ -107,7 +107,7 @@
             //     }
             // );
 
-            $("input[type=checkbox]#off-on").click(function() {   
+            $("input[type=checkbox].off-on").click(function() {   
 
                 if ($(this).prop("checked") == true)    // if it is currently off 
                     payload = { "level": 0 }    // then it will be on now
@@ -135,13 +135,13 @@
     <input type="button" value="Off" class="pumpState">
 
     <label class="switch">
-        <input type="checkbox">
-        <span class="slider" id="off-on"></span>
+        <input type="checkbox" class="off-on">
+        <span class="slider"></span>
     </label>
 
     <label class="switch">
-        <input type="checkbox">
-        <span class="slider" id="auto"></span>
+        <input type="checkbox" class="auto">
+        <span class="slider"></span>
     </label>
 
 
