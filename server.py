@@ -6,6 +6,7 @@ Dependencies:
 
 """
 
+import this
 import RPi.GPIO as GPIO
 import time
 import logging
@@ -17,7 +18,8 @@ from flask_restful import Resource, Api, reqparse, inputs
 # Global variables
 WATER_PUMP = 7
 #HUMIDITY_SENSOR = 40
-#MOISTURE_SENSOR = 11
+MOISTURE_SENSOR = 11
+auto = False
 state = {
     'level': 1 	# state of the water pump. 1:off, 0:on
 }
@@ -34,7 +36,6 @@ app = Flask(__name__) # Core Flask app.
 api = Api(app) # Flask-RESTful extension wrapper
 
 
-
 # @app.route applies to the core Flask instance (app).
 # Here we are serving a simple web page.
 @app.route('/', methods=['GET'])
@@ -43,11 +44,17 @@ def index():
     relative to this Python file."""
     return render_template('index_api_client.html', pin=WATER_PUMP)
 
+@app.route('/autoOn', methods = ['POST'])
+def update_text():
+    auto = True
 
+@app.route('/autoOff', methods = ['POST'])
+def update_text():
+    auto = False
 
 # Flask-restful resource definitions.
 # A 'resource' is modeled as a Python Class.
-class PumpControl(Resource):  # (10)
+class PumpControl(Resource):
 
     def __init__(self):
         self.args_parser = reqparse.RequestParser()
@@ -89,3 +96,21 @@ if __name__ == '__main__':
     # Flask GitHub Issue: https://github.com/pallets/flask/issues/3189
 
     app.run(host="0.0.0.0", debug=True)
+
+    try:
+        while True:
+            if (auto == True):
+                moisture_value = GPIO.input(MOISTURE_SENSOR)
+                if (moisture_value == 0):  # dry
+                    state['level'] = 0     # on
+                    GPIO.output(WATER_PUMP, 0)
+                    print("The soil is dry. The water pump started to pump water!")
+                else:
+                    state['level'] = 1   # off
+                    GPIO.output(WATER_PUMP, 1)
+                    print("The soil is wet. The water pump stopped pumping water!")
+                time.sleep(1)
+                PumpControl.get(self=this)
+    finally:
+        print("\nSystem has been stopped")
+        GPIO.cleanup()
