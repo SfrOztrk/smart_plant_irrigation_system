@@ -81,7 +81,7 @@
                 updateControls(serverResponse);
             });
         }
-        
+
 
         function updateControls(data) {
             str = "";
@@ -104,10 +104,19 @@
 
                 $("input[type=checkbox].auto").prop("checked", false)  // disable the auto mode
 
-                if ($(this).prop("checked") == true)
-                    payload = { "level": 0 }    // 0: on
-                else
-                    payload = { "level": 1 }    // 1: off
+                if ($(this).prop("checked") == true) {
+                    payload = { 
+                        "level": 0,  // on
+                        "auto": 0    // off
+                    }    
+
+                }
+                else {
+                    payload = { 
+                        "level": 1,  // off
+                        "auto": 0    // off
+                    }  
+                }
                 
                 postUpdate(payload);
                 }
@@ -116,10 +125,10 @@
             $("input[type=checkbox].auto").click(function() {   
 
                 if ($(this).prop("checked") == true) {
-                    postAuto(1)
+                 
                 } 
                 else {
-                    postAutoOff(0)
+               
                 }
 
             });
