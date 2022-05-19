@@ -49,21 +49,18 @@ def index():
 def auto_on():
     auto = True
     try:
-        while True:
-            if (auto):
-                moisture_value = GPIO.input(MOISTURE_SENSOR)
-                if (moisture_value == 0):  # dry
-                    state['level'] = 0     # on
-                    GPIO.output(WATER_PUMP, 0)
-                    print("The soil is dry. The water pump started to pump water!")
-                else:
-                    state['level'] = 1   # off
-                    GPIO.output(WATER_PUMP, 1)
-                    print("The soil is wet. The water pump stopped pumping water!")
+        while auto:
+            moisture_value = GPIO.input(MOISTURE_SENSOR)
+            if (moisture_value == 0):  # dry
+                state['level'] = 0     # on
+                GPIO.output(WATER_PUMP, 0)
+                print("The soil is dry. The water pump started to pump water!")
             else:
-                return state
-
+                state['level'] = 1   # off
+                GPIO.output(WATER_PUMP, 1)
+                print("The soil is wet. The water pump stopped pumping water!")
             time.sleep(1)
+        return state
 
     finally:
         print("\nSystem has been stopped")
