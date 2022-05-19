@@ -93,7 +93,7 @@
 
         function updateControls(data) {
             str = "";
-            if (data.level == 0) 
+            if (data.level == 1) 
                 str = "Off"
             else
                 str = "On"
@@ -107,9 +107,9 @@
             // $("input[type=button].pumpState").click(function() {   
             //     pump_state = $(this).val();
             //     if (pump_state == "Off")    // if it is currently off 
-            //         payload = { "level": 1 }    // then it will be on now
+            //         payload = { "level": 0 }    // then it will be on now
             //     else
-            //         payload = { "level": 0 }
+            //         payload = { "level": 1 }
                 
             //     postUpdate(payload);
             //     }
@@ -117,7 +117,7 @@
 
             $("input[type=checkbox]").click(function() {   
 
-                if ($(this).prop("checked"))    // if it is currently off 
+                if ($(this).prop("checked") == true)    // if it is currently off 
                     payload = { "level": 0 }    // then it will be on now
                 else
                     payload = { "level": 1 }
