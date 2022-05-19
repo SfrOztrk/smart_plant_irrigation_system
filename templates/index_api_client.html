@@ -115,7 +115,7 @@
 
                 if ($(this).prop("checked") == true) {
                     $("input[type=checkbox].off-on").prop("disabled", true)   
-                    
+
                 } 
                 else {
                     $("input[type=checkbox].off-on").prop("disabled", false)   
@@ -137,15 +137,19 @@
 <body>
 
     <h1>Flask RESTful API Example</h1>
-    LED is connected to GPIO {{pin}}<br>
-    Irrigation: <span id="pumpState">Off</span><br>
+    Water pump is connected to GPIO {{pin}}<br>
+    Irrigation: <span id="pumpState"></span><br>
     
-
+    
+    Pump: 
     <label class="switch">
         <input type="checkbox" class="off-on">
         <span class="slider"></span>
     </label>
 
+    <hr><hr>
+
+    Automatic mode:
     <label class="switch">
         <input type="checkbox" class="auto">
         <span class="slider"></span>
