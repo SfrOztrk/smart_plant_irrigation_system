@@ -6,6 +6,7 @@ Dependencies:
 
 """
 
+from threading import Thread
 import this
 import RPi.GPIO as GPIO
 import time
@@ -19,10 +20,9 @@ from flask_restful import Resource, Api, reqparse, inputs
 WATER_PUMP = 7
 #HUMIDITY_SENSOR = 40
 MOISTURE_SENSOR = 11
-auto = False
 state = {
     'level': 1, 	# state of the water pump. 1:off, 0:on
-    'moisture': 0
+    'auto': 0
 }
 
 GPIO.setmode(GPIO.BOARD)
@@ -46,32 +46,6 @@ def index():
     relative to this Python file."""
     return render_template('index_api_client.html', pin=WATER_PUMP)
 
-@app.route('/auto', methods = ['POST'])
-def auto():
-
-    try:
-        while auto:
-            moisture_value = GPIO.input(MOISTURE_SENSOR)
-            if (moisture_value == 0):  # dry
-                state['level'] = 0     # on
-                GPIO.output(WATER_PUMP, 0)
-                print("The soil is dry. The water pump started to pump water!")
-            else:
-                state['level'] = 1   # off
-                GPIO.output(WATER_PUMP, 1)
-                print("The soil is wet. The water pump stopped pumping water!")
-            time.sleep(1)
-        return state
-
-    finally:
-        print("\nSystem has been stopped")
-        GPIO.cleanup()
-
-
-@app.route('/autoOff', methods = ['POST'])
-def auto_off():
-    auto = False
-    return state
 
 # Flask-restful resource definitions.
 # A 'resource' is modeled as a Python Class.
@@ -100,6 +74,7 @@ class PumpControl(Resource):
         args = self.args_parser.parse_args()
 
         state['level'] = args.level
+        state['auto'] = args.auto
         GPIO.output(WATER_PUMP, state['level'])
         return state
 
@@ -107,6 +82,24 @@ class PumpControl(Resource):
 # Register Flask-RESTful resource and mount to server end point /led
 api.add_resource(PumpControl, '/pump')
 
+def auto():
+    try:
+        while state['auto'] == 1:
+            moisture_value = GPIO.input(MOISTURE_SENSOR)
+            if (moisture_value == 0):  # dry
+                state['level'] = 0     # on
+                GPIO.output(WATER_PUMP, 0)
+                print("The soil is dry. The water pump started to pump water!")
+            else:
+                state['level'] = 1   # off
+                GPIO.output(WATER_PUMP, 1)
+                print("The soil is wet. The water pump stopped pumping water!")
+            time.sleep(1)
+        return state
+
+    finally:
+        print("\nSystem has been stopped")
+        GPIO.cleanup()
 
 if __name__ == '__main__':
 

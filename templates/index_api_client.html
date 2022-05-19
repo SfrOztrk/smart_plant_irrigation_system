@@ -81,16 +81,7 @@
                 updateControls(serverResponse);
             });
         }
-
-        // POST Request to server to set water pump state.
-        function postAutoOn() {
-            $.post("/auto/<int:num>", payload, function(serverResponse, status) {
-                console.log(serverResponse);
-                updateControls(serverResponse);
-            });
-        }
-
-
+        
 
         function updateControls(data) {
             str = "";
@@ -125,10 +116,10 @@
             $("input[type=checkbox].auto").click(function() {   
 
                 if ($(this).prop("checked") == true) {
-                    postAutoOn()
+                    postAuto(1)
                 } 
                 else {
-                    postAutoOff()
+                    postAutoOff(0)
                 }
 
             });
