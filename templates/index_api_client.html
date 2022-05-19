@@ -27,7 +27,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: red;
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 34px;
@@ -47,11 +47,11 @@
         }
         
         input:checked + .slider {
-            background-color: #2196F3;
+            background-color: green;
         }
         
         input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3;
+            box-shadow: 0 0 1px green;
         }
         
         input:checked + .slider:before {
@@ -138,16 +138,17 @@
 
     <h1>Flask RESTful API Example</h1>
     Water pump is connected to GPIO {{pin}}<br>
-    Irrigation: <span id="pumpState"></span><br>
     
-    
+    <hr>
+
     Pump: 
     <label class="switch">
         <input type="checkbox" class="off-on">
         <span class="slider"></span>
     </label>
-
-    <hr><hr>
+    Irrigation: <span id="pumpState"></span><br>
+    
+    <hr>
 
     Automatic mode:
     <label class="switch">
