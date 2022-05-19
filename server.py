@@ -26,6 +26,7 @@ state = {
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(WATER_PUMP, GPIO.OUT)
+GPIO.setup(MOISTURE_SENSOR, GPIO.IN)
 GPIO.output(WATER_PUMP, state['level'])
 #GPIO.setup(humidity_sensor, GPIO.IN)
 
