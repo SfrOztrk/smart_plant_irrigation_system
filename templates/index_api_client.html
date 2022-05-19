@@ -102,10 +102,12 @@
         $(document).ready(function() {
             $("input[type=checkbox].off-on").click(function() {   
 
-                if ($(this).prop("checked") == true)    // if it is currently off 
-                    payload = { "level": 0 }    // then it will be on now
+                $("input[type=checkbox].auto").prop("checked", false)  // disable the auto mode
+
+                if ($(this).prop("checked") == true)
+                    payload = { "level": 0 }    // 0: on
                 else
-                    payload = { "level": 1 }
+                    payload = { "level": 1 }    // 1: off
                 
                 postUpdate(payload);
                 }
