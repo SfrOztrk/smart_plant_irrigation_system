@@ -87,6 +87,8 @@ class PumpControl(Resource):
 # Register Flask-RESTful resource and mount to server end point /led
 api.add_resource(PumpControl, '/pump')
 
+
+# not working yet
 def auto():
     try:
         while state['auto'] == 1:
