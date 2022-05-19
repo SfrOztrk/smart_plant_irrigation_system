@@ -4,7 +4,6 @@
 <head>
     <title>Flask Restful API Example</title>
     <style>
-
         /* The switch - the box around the slider */
         .switch {
             position: relative;
@@ -31,6 +30,7 @@
             background-color: #ccc;
             -webkit-transition: .4s;
             transition: .4s;
+            border-radius: 34px;
         }
         
         .slider:before {
@@ -43,6 +43,7 @@
             background-color: white;
             -webkit-transition: .4s;
             transition: .4s;
+            border-radius: 50%;
         }
         
         input:checked + .slider {
@@ -57,15 +58,6 @@
             -webkit-transform: translateX(26px);
             -ms-transform: translateX(26px);
             transform: translateX(26px);
-        }
-        
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-        
-        .slider.round:before {
-            border-radius: 50%;
         }
 
     </style>
@@ -115,7 +107,7 @@
             //     }
             // );
 
-            $("input[type=checkbox]").click(function() {   
+            $("input[type=checkbox]#off-on").click(function() {   
 
                 if ($(this).prop("checked") == true)    // if it is currently off 
                     payload = { "level": 0 }    // then it will be on now
@@ -144,8 +136,13 @@
 
     <label class="switch">
         <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
+        <span class="slider" id="off-on"></span>
+    </label>
+
+    <label class="switch">
+        <input type="checkbox">
+        <span class="slider" id="auto"></span>
+    </label>
 
 
 </body>
