@@ -100,13 +100,28 @@
 
         // Event listener for button value changes.
         $(document).ready(function() {
-             $("input[type=checkbox].off-on").click(function() {   
+            $("input[type=checkbox].off-on").click(function() {   
 
                 if ($(this).prop("checked") == true)    // if it is currently off 
                     payload = { "level": 0 }    // then it will be on now
                 else
                     payload = { "level": 1 }
                 
+                postUpdate(payload);
+                }
+            );
+
+            $("input[type=checkbox].auto").click(function() {   
+
+                if ($(this).prop("checked") == true) {
+                    $("input[type=checkbox].off-on").prop("disabled", true)   
+                    
+                } 
+                else {
+                    $("input[type=checkbox].off-on").prop("disabled", false)   
+
+                }
+
                 postUpdate(payload);
                 }
             );
