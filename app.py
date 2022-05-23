@@ -31,8 +31,7 @@ def get_pump():
 # turn on or off the pump manually
 @app.route('/pump', methods=['POST'])
 def set_pump():
-    print("HEY")
-    # print(request.form["cb1"])
+    print(request.form.get("cb1"))
     # main.set_pump()    # state = "ON" or "OFF"
     update_status()
     return render_template('index_api_client.html', mois=status['moisture'], pump=status['pump'], pump_pin=main.WATER_PUMP, mois_pin=main.MOISTURE_SENSOR)
