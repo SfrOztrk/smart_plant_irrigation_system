@@ -1,6 +1,6 @@
 // GET request to server to retrieve water pump state.
 function getState() {
-    $.get("/pump", function(serverResponse, status) {          
+    $.get("/pump", function(serverResponse) {          
     console.log(serverResponse)
     updateControls(serverResponse)                                   
     });
@@ -31,11 +31,11 @@ function updateControls(data) {
 
 // Event listener for button value changes.
 $(document).ready(function() {
-    $("input[type=checkbox].off-on").click(function() {   
+    $("input[type=checkbox].off-on").click(function() {   // if click off-on checkbox
 
-        $("input[type=checkbox].auto").prop("checked", false)  // disable the auto mode
+        $("input[type=checkbox].auto").prop("checked", false)   // disable the auto mode
 
-        if ($(this).prop("checked") == true) {
+        if ($(this).prop("checked") == true) {    // if off-on checkbox is true
             payload = { 
                 "level": 0
             }    
