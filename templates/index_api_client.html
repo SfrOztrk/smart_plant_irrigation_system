@@ -1,141 +1,11 @@
-<!-- chapter03/templates/inde.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Flask Restful API Example</title>
-    <style>
-        /* The switch - the box around the slider */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 30px;
-            height: 17px;
-        }
-        
-        /* Hide default HTML checkbox */
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        /* The slider */
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: red;
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 34px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 13px;
-            width: 13px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background-color: green;
-        }
-        
-        input:focus + .slider {
-            box-shadow: 0 0 1px green;
-        }
-        
-        input:checked + .slider:before {
-            -webkit-transform: translateX(13px);
-            -ms-transform: translateX(13px);
-            transform: translateX(13px);
-        }
 
-    </style>
-
+    <link rel="stylesheet" href="/style.css">
     <script src="/static/jquery.min.js"></script>                            
-    <script type="text/javascript">
-
-        // GET request to server to retrieve water pump state.
-        function getState() {
-            $.get("/pump", function(serverResponse, status) {          
-            console.log(serverResponse)
-            updateControls(serverResponse)                                   
-            });
-        }
-
-
-        // POST Request to server to set water pump state.
-        function postUpdate(payload) {
-            $.post("/pump", payload, function(serverResponse, status) {
-                console.log(serverResponse);
-                updateControls(serverResponse);
-            });
-        }
-
-
-        function updateControls(data) {
-            str = "";
-            if (data.level == 1) {
-                str = "Off"
-                $("input[type=checkbox].off-on").prop("checked", false)
-            }
-            else {
-                $("input[type=checkbox].off-on").prop("checked", true)
-                str = "On"
-            }
-
-            $("#pumpState").html(str);
-        }
-
-
-        // Event listener for button value changes.
-        $(document).ready(function() {
-            $("input[type=checkbox].off-on").click(function() {   
-
-                $("input[type=checkbox].auto").prop("checked", false)  // disable the auto mode
-
-                if ($(this).prop("checked") == true) {
-                    payload = { 
-                        "level": 0
-                    }    
-
-                }
-                else {
-                    payload = { 
-                        "level": 1
-                    }  
-                }
-                
-                postUpdate(payload);
-                }
-            );
-
-            $("input[type=checkbox].auto").click(function() {   
-
-                if ($(this).prop("checked") == true) {
-                 
-                } 
-                else {
-               
-                }
-
-            });
-
-            // Initialise slider value form state on server.
-            getState() 
-        });
-
-    </script>
+    <script src="/static/jQuery.js"></script>
 
 </head>
 
@@ -146,19 +16,24 @@
     
     <hr>
 
-    Pump: 
-    <label class="switch">
-        <input type="checkbox" class="off-on">
-        <span class="slider"></span>
-    </label>
+    <form action="#" method="post">
+        <p>Pump:</p>
+
+        <label class="switch">
+            <input type="checkbox" name="cb1" class="off-on">
+            <span class="slider"></span>
+        </label>
+    </form>
+    
     <br>
+    
     Irrigation: <span id="pumpState"></span><br><br>
     
     <hr>
 
     Automatic mode:
     <label class="switch">
-        <input type="checkbox" class="auto">
+        <input type="checkbox" name="cb2" class="auto">
         <span class="slider"></span>
     </label>
     <p><i>not working yet</i></p> 
