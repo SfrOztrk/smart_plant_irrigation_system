@@ -20,7 +20,7 @@ app = Flask(__name__) # Core Flask app.
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index_api_client.html', **status)
+    return render_template('index.html', **status)
 
 
 # get the status 
@@ -36,7 +36,7 @@ def set_pump():
     print(request.form.get("cb1"))
     # main.set_pump()    # state = "ON" or "OFF"
     update_status()
-    return render_template('index_api_client.html', **status)
+    return render_template('index.html', **status)
 
 
 
