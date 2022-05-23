@@ -33,7 +33,7 @@ def get_pump():
 
 
 # turn on or off the pump manually
-@app.route('/pump', methods=['POST'])
+@app.route('http://localhost:5000//pump', methods=['POST'])
 def set_pump():
     print(request.form.get("cb1"))
     # main.set_pump()    # state = "ON" or "OFF"
