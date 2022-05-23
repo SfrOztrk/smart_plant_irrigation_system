@@ -8,7 +8,7 @@ status = {
     "pump": "OFF",
     "moisture": "WET"
 }
-main.set_pump(status['pump'])
+main.set_pump("OFF")
 
 
 
@@ -18,7 +18,7 @@ app = Flask(__name__) # Core Flask app.
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index_api_client.html', mois=status['moisture'], pump=status['pump'], pump_pin=main.WATER_PUMP, mois_pin=main.MOISTURE_SENSOR)
+    return render_template('index_api_client.html', **status)
 
 
 # get the status 
