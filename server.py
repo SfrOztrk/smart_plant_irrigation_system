@@ -7,10 +7,8 @@ Dependencies:
 """
 
 from threading import Thread
-import this
 import RPi.GPIO as GPIO
 import time
-import logging
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api, reqparse, inputs
 
@@ -62,12 +60,7 @@ class PumpControl(Resource):
             help='Set level of the water pump {error_msg}',
             default=None)
 
-        self.args_parser.add_argument(
-            name='auto',	# Name of arguement
-            required=False,  	# Mandatory arguement
-            type=inputs.int_range(0, 1),	# Allowed 0 or 1
-            help='Set auto mode of the water pump {error_msg}',
-            default=None)
+        
 
 
     def get(self):
