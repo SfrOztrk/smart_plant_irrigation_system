@@ -7,21 +7,22 @@ function getStatus() {
 }
 
 
-// POST Request to server to turn off the water pump manually.
-function postPumpOff() {
-    $.post("/pump/OFF", function(serverResponse) {
-        console.log(serverResponse);
-        // updateControls(serverResponse);
-    });
-}
+// // POST Request to server to turn off the water pump manually.
+// function postPumpOff() {
+//     $.post("/pump/OFF", function(serverResponse) {
+//         console.log(serverResponse);
+//         // updateControls(serverResponse);
+//     });
+// }
 
-// POST Request to server to turn on the water pump manually.
-function postPumpOn() {
-    $.post("/pump/ON", function(serverResponse) {
-        console.log(serverResponse);
-        // updateControls(serverResponse);
-    });
-}
+// // POST Request to server to turn on the water pump manually.
+// function postPumpOn() {
+//     $.post("/pump/ON", function(serverResponse) {
+//         console.log(serverResponse);
+//         // updateControls(serverResponse);
+//     });
+// }
+
 
 
 // POST Request to server to set water pump state automatically.
@@ -45,32 +46,32 @@ function postAutoMode(payload) {
 // }
 
 
-$(document).ready(function() {
-    // event listener for off-on button
-    $("input[type=checkbox].off-on").click(function() {   // if click off-on checkbox
+// $(document).ready(function() {
+//     // event listener for off-on button
+//     $("input[type=checkbox].off-on").click(function() {   // if you click "off-on" checkbox
 
-        $("input[type=checkbox].auto").prop("checked", false)   // disable the auto mode
+//         $("input[type=checkbox].auto").prop("checked", false)   // disable the auto mode
 
-        if ($(this).prop("checked") == true) {    // if off-on checkbox is true
-            postPumpOn();
-        }
-        else {
-            postPumpOff();
-        }
-    });
+//         if ($(this).prop("checked") == true) {    // if off-on checkbox is true
+//             postPump({"pump" : "ON"});
+//         }
+//         else {
+//             postPumpOff({"pump" : "OFF"});
+//         }
+//     });
 
-    // event listener for auto button
-    $("input[type=checkbox].auto").click(function() {   
+//     // event listener for auto button
+//     $("input[type=checkbox].auto").click(function() {   
 
-        if ($(this).prop("checked") == true) {
+//         if ($(this).prop("checked") == true) {
          
-        } 
-        else {
+//         } 
+//         else {
        
-        }
+//         }
 
-    });
+//     });
 
-    // Initialise slider value form state on server.
-    getPumpState() 
-});
+//     // Initialise slider value form state on server.
+//     getPumpState() 
+// });
