@@ -7,8 +7,8 @@ import main
 status = {
     'pump': "OFF",
     'moisture': "WET",
-    'pump_pin': main.WATER_PUMP,
-    'mois_pin': main.MOISTURE_SENSOR
+    'pump_pin': 7,
+    'mois_pin': 11
 }
 main.set_pump("OFF")
 
