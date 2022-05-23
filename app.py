@@ -5,8 +5,10 @@ import main
 
 
 status = {
-    "pump": "OFF",
-    "moisture": "WET"
+    'pump': "OFF",
+    'moisture': "WET",
+    'pump_pin': main.WATER_PUMP,
+    'mois_pin': main.MOISTURE_SENSOR
 }
 main.set_pump("OFF")
 
@@ -34,7 +36,7 @@ def set_pump():
     print(request.form.get("cb1"))
     # main.set_pump()    # state = "ON" or "OFF"
     update_status()
-    return render_template('index_api_client.html', mois=status['moisture'], pump=status['pump'], pump_pin=main.WATER_PUMP, mois_pin=main.MOISTURE_SENSOR)
+    return render_template('index_api_client.html', **status)
 
 
 
