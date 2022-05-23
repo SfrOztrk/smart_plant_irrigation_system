@@ -15,6 +15,8 @@ from flask import Flask, request, render_template
 from flask_restful import Resource, Api, reqparse, inputs
 
 
+GPIO.setwarnings(False)
+
 
 # Global variables
 WATER_PUMP = 7
