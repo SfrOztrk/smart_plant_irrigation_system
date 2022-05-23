@@ -4,10 +4,11 @@ import time
 MOISTURE_SENSOR = 11
 WATER_PUMP = 7
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(MOISTURE_SENSOR, GPIO.IN)
-GPIO.setup(WATER_PUMP, GPIO.OUT)
 
+def init_pins():
+	GPIO.setmode(GPIO.BOARD)
+	GPIO.setup(MOISTURE_SENSOR, GPIO.IN)
+	GPIO.setup(WATER_PUMP, GPIO.OUT)
 
 def get_moisture_status():
 	if GPIO.input(MOISTURE_SENSOR) == 1:
