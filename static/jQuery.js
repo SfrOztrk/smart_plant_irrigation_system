@@ -9,7 +9,7 @@ function getState() {
 
 // POST Request to server to set water pump state.
 function postUpdate(payload) {
-    $.post("/pump", payload, function(serverResponse, status) {
+    $.posta("/pump", payload, function(serverResponse, status) {
         console.log(serverResponse);
         updateControls(serverResponse);
     });

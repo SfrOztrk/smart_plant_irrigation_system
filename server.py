@@ -75,7 +75,7 @@ class PumpControl(Resource):
         return state
 
 
-    def post(self):
+    def posta(self):
         """Handles HTTP POST requests to set water pump level."""
         global state
 
