@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Restful API Example</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/jquery.min.js"></script>                            
+    <script src="/static/jq_deneme.js"></script>
+
+</head>
+
+<body>
+
+    <h1>Smart Irrigation System - Flask RESTful API</h1>
+    Water pump is connected to GPIO {{pump_pin}} <br>
+    Soil moisture sensor is connected to GPIO {{mois_pin}} <br>
+    
+    <hr>
+
+    <form action="#" method="post">
+        Pump:
+
+        <label class="switch">
+            <input type="checkbox" name="cb1" class="off-on">
+            <span class="slider"></span>
+        </label>
+    </form>
+    
+    <br>
+    
+    Irrigation: {{pump}}
+    <br>
+    Soil: {{mois}}
+    <!-- <span id="pumpState"></span> -->
+    <br><br>
+    
+    <hr>
+
+    Automatic mode:
+    <label class="switch">
+        <input type="checkbox" name="cb2" class="auto">
+        <span class="slider"></span>
+    </label>
+    <p><i>not working yet</i></p> 
+
+
+</body>
+
+</html>

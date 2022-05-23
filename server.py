@@ -68,7 +68,7 @@ class PumpControl(Resource):
         return state
 
 
-    def posta(self):
+    def post(self):
         """Handles HTTP POST requests to set water pump level."""
         global state
 
@@ -79,7 +79,7 @@ class PumpControl(Resource):
         return state
 
 
-# Register Flask-RESTful resource and mount to server end point /led
+# Register Flask-RESTful resource and mount to server end point /pump
 api.add_resource(PumpControl, '/pump')
 
 

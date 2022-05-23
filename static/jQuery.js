@@ -1,3 +1,40 @@
+// Event listener for button value changes.
+$(document).ready(function() {
+    // off-on button event listener
+    $("input[type=checkbox].off-on").click(function() {   // if click off-on checkbox
+        $("input[type=checkbox].auto").prop("checked", false)   // disable the auto mode
+
+        if ($(this).prop("checked") == true) {    // if off-on checkbox is checked now
+            payload = { 
+                "level": 0
+            }    
+        }
+        else {
+            payload = { 
+                "level": 1
+            }  
+        }
+
+        postUpdate(payload);
+    });
+
+
+    // auto button event listener
+    $("input[type=checkbox].auto").click(function() {   // if click auto button
+
+        if ($(this).prop("checked") == true) {   // if auto button is checked now
+         
+        } 
+        else {
+       
+        }
+
+    });
+
+    // Initialise slider value form state on server.
+    getState() 
+});
+
 // GET request to server to retrieve water pump state.
 function getState() {
     $.get("/pump", function(serverResponse) {          
@@ -9,7 +46,7 @@ function getState() {
 
 // POST Request to server to set water pump state.
 function postUpdate(payload) {
-    $.posta("/pump", payload, function(serverResponse, status) {
+    $.post("/pump", payload, function(serverResponse) {
         console.log(serverResponse);
         updateControls(serverResponse);
     });
@@ -28,38 +65,3 @@ function updateControls(data) {
     }
     $("#pumpState").html(str);
 }
-
-// Event listener for button value changes.
-$(document).ready(function() {
-    $("input[type=checkbox].off-on").click(function() {   // if click off-on checkbox
-
-        $("input[type=checkbox].auto").prop("checked", false)   // disable the auto mode
-
-        if ($(this).prop("checked") == true) {    // if off-on checkbox is true
-            payload = { 
-                "level": 0
-            }    
-        }
-        else {
-            payload = { 
-                "level": 1
-            }  
-        }
-        postUpdate(payload);
-        }
-    );
-
-    $("input[type=checkbox].auto").click(function() {   
-
-        if ($(this).prop("checked") == true) {
-         
-        } 
-        else {
-       
-        }
-
-    });
-
-    // Initialise slider value form state on server.
-    getState() 
-});
