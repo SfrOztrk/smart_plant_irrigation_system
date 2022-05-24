@@ -18,7 +18,7 @@ def get_moisture_status():
 		return 'DRY'
 
 def get_pump_status():
-	if GPIO.input(WATER_PUMP) == 1:
+	if GPIO.input(WATER_PUMP) == 0:
 		return 'ON'
 	else:
 		return 'OFF'
