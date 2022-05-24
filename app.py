@@ -14,6 +14,7 @@ status = {
     'auto_mode': 'OFF'
 }
 
+
 main.init_pins()
 main.set_pump("OFF")
 
