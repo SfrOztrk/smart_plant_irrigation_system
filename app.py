@@ -56,7 +56,7 @@ def auto(toggle):
         if not running:
             os.system("python3 ../auto_water.py&")
     else:
-        os.system("pkill -f main.py")
+        os.system("pkill -f ../main.py")
 
     update_status()
     return render_template('index.html', **status)
