@@ -12,7 +12,7 @@ def init_pins():
 	GPIO.setup(WATER_PUMP, GPIO.OUT)
 
 def get_moisture_status():
-	if GPIO.input(MOISTURE_SENSOR) == 0:
+	if GPIO.input(MOISTURE_SENSOR) == 1:
 		return 'WET'
 	else:
 		return 'DRY'
@@ -30,6 +30,7 @@ def set_pump(state):
 		GPIO.output(WATER_PUMP, 1)
 
 def irrigation(delay):
+	init_pins()
 	try:
 		while True:
 

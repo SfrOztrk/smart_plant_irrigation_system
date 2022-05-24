@@ -16,7 +16,7 @@ status = {
 
 
 main.init_pins()
-main.set_pump("OFF")
+main.set_pump('OFF')
 
 
 
