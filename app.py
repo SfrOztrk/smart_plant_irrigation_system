@@ -46,17 +46,17 @@ def auto(toggle):
     status['auto_mode'] = toggle
 
     running = False
-    if toggle == status['auto_mode']:
+    if status['auto_mode'] == 'ON':
         for process in psutil.process_iter():
             try:
-                if process.cmdline()[1] == '../auto_water.py':
+                if process.cmdline()[1] == '/auto_water.py':
                     running = True
             except:
                 pass
         if not running:
-            os.system("python3 auto_water.py&")
+            os.system("python3 ../auto_water.py&")
     else:
-        os.system("pkill -f ../main.py")
+        os.system("pkill -f /main.py")
 
     update_status()
     return render_template('index.html', **status)
