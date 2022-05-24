@@ -49,7 +49,7 @@ def auto(toggle):
     if toggle == status['auto_mode']:
         for process in psutil.process_iter():
             try:
-                if process.cmdline()[1] == 'auto_water.py':
+                if process.cmdline()[1] == '../auto_water.py':
                     running = True
             except:
                 pass
