@@ -30,6 +30,7 @@ def set_pump(state):
 		GPIO.output(WATER_PUMP, 1)
 
 def irrigation(delay):
+	init_pins()
 	try:
 		while True:
 
