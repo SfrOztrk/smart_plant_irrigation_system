@@ -43,11 +43,10 @@ def set_pump(toggle):
 # turn on or off the auto mode
 @app.route('/auto/<toggle>')
 def auto(toggle):
-    
-    status['auto_mode'] = toggle
 
     running = False
-    if status['auto_mode'] == 'ON':
+    if toggle == 'ON':
+        status['auto_mode'] = 'ON'
         for process in psutil.process_iter():
             try:
                 if process.cmdline()[1] == '/auto_water.py':
@@ -57,7 +56,8 @@ def auto(toggle):
         if not running:
             os.system("python3 /home/pi/Projects/iot_soil_moisture_project/auto_water.py&")
     else:
-        os.system("pkill -f /main.py")
+        status['auto_mode'] = 'OFF'
+        os.system("pkill -f /home/pi/Projects/iot_soil_moisture_project/main.py")
 
     update_status()
     return render_template('index.html', **status)
