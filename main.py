@@ -25,9 +25,9 @@ def get_pump_status():
 
 def set_pump(state):
 	if state == 'ON':
-		GPIO.output(WATER_PUMP, GPIO.HIGH)
+		GPIO.output(WATER_PUMP, 0)
 	elif state == 'OFF':
-		GPIO.output(WATER_PUMP, GPIO.LOW)
+		GPIO.output(WATER_PUMP, 1)
 
 def irrigation(delay=.5):
 	try:

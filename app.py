@@ -43,8 +43,10 @@ def set_pump(toggle):
 @app.route('/auto/<toggle>')
 def auto(toggle):
     
+    status['auto_mode'] = toggle
+
     running = False
-    if toggle == "ON":
+    if toggle == status['auto_mode']:
         for process in psutil.process_iter():
             try:
                 if process.cmdline()[1] == 'auto_water.py':
