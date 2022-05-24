@@ -41,7 +41,7 @@ def set_pump(toggle):
 
 # turn on or off the auto mode
 @app.route('/auto/<toggle>')
-def set_pump(toggle):
+def auto(toggle):
     
     running = False
     if toggle == "ON":
