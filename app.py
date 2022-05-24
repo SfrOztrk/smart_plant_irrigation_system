@@ -26,6 +26,7 @@ app = Flask(__name__) # Core Flask app.
 
 @app.route('/', methods=['GET'])
 def index():
+    update_status()
     return render_template('index.html', **status)
 
 
