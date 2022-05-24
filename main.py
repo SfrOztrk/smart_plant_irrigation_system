@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import app
+
 
 MOISTURE_SENSOR = 11
 WATER_PUMP = 7
@@ -41,7 +41,7 @@ def irrigation(delay):
 				set_pump('OFF')
 				print("The soil is wet. The water pump stopped pumping water!")
 			
-			app.index()
+			# app.index()
 			time.sleep(delay)
 	
 	except KeyboardInterrupt:  	# If CTRL+C is pressed, exit cleanly:
