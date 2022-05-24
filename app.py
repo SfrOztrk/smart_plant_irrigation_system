@@ -5,8 +5,8 @@ import main
 
 
 status = {
-    'pump': "OFF",
-    'moisture': "WET",
+    'pump': 'OFF',
+    'moisture': 'WET',
     'pump_pin': main.WATER_PUMP,
     'mois_pin': main.MOISTURE_SENSOR
 }
@@ -42,8 +42,8 @@ def set_pump(toggle):
 
 
 def update_status():
-    status["pump"] = main.get_pump_status()   # "ON" or "OFF"
-    status["moisture"] = main.get_moisture_status()   # "DRY" or "WET"
+    status['pump'] = main.get_pump_status()   # "ON" or "OFF"
+    status['moisture'] = main.get_moisture_status()   # "DRY" or "WET"
 
 
 if __name__ == '__main__':

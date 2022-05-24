@@ -12,20 +12,20 @@ def init_pins():
 
 def get_moisture_status():
 	if GPIO.input(MOISTURE_SENSOR) == 1:
-		return "WET"
+		return 'WET'
 	else:
-		return "DRY"
+		return 'DRY'
 
 def get_pump_status():
 	if GPIO.input(WATER_PUMP) == 1:
-		return "ON"
+		return 'ON'
 	else:
-		return "OFF"
+		return 'OFF'
 
 def set_pump(state):
-	if state == "ON":
+	if state == 'ON':
 		GPIO.output(WATER_PUMP, GPIO.HIGH)
-	elif state == "OFF":
+	elif state == 'OFF':
 		GPIO.output(WATER_PUMP, GPIO.LOW)
 
 def auto_mode(delay=.5):
