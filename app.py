@@ -33,10 +33,9 @@ def get_pump():
 
 
 # turn on or off the pump manually
-@app.route('/pump', methods=['POST'])
-def set_pump():
-    print(request.form.get("cb1"))
-    # main.set_pump()    # state = "ON" or "OFF"
+@app.route('/pump/<toggle>')
+def set_pump(toggle):
+    main.set_pump(toggle)    # toggle = "ON" or "OFF"
     update_status()
     return render_template('index.html', **status)
 
