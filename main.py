@@ -46,3 +46,5 @@ def irrigation(delay):
 	
 	except KeyboardInterrupt:  	# If CTRL+C is pressed, exit cleanly:
 		GPIO.cleanup() 			# cleanup all GPI
+	finally:
+		GPIO.cleanup() 
