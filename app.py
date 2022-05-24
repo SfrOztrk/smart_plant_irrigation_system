@@ -54,7 +54,7 @@ def auto(toggle):
             except:
                 pass
         if not running:
-            os.system("python3 ../auto_water.py&")
+            os.system("python3 /auto_water.py&")
     else:
         os.system("pkill -f /main.py")
 
