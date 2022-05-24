@@ -4,6 +4,7 @@ import time
 MOISTURE_SENSOR = 11
 WATER_PUMP = 7
 
+auto_mode = 'OFF'	# default value is OFF
 
 def init_pins():
 	GPIO.setmode(GPIO.BOARD)
@@ -28,15 +29,15 @@ def set_pump(state):
 	elif state == 'OFF':
 		GPIO.output(WATER_PUMP, GPIO.LOW)
 
-def auto_mode(delay=.5):
+def irrigation(delay=.5):
 	try:
-		while True:
+		while auto_mode=='ON':
 
-			if get_moisture_status == 0:
-				pump_on()
+			if get_moisture_status() == 0:
+				set_pump('ON')
 				print("The soil is dry. The water pump started to pump water!")
 			else:
-				pump_off()
+				set_pump('OFF')
 				print("The soil is wet. The water pump stopped pumping water!")
 			
 			time.sleep(delay)

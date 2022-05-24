@@ -2,13 +2,16 @@ import time
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api, reqparse, inputs
 import main
+import os
+import psutil
 
 
 status = {
     'pump': 'OFF',
     'moisture': 'WET',
     'pump_pin': main.WATER_PUMP,
-    'mois_pin': main.MOISTURE_SENSOR
+    'mois_pin': main.MOISTURE_SENSOR,
+    'auto_mode': 'OFF'
 }
 
 main.init_pins()
@@ -25,20 +28,36 @@ def index():
     return render_template('index.html', **status)
 
 
-# get the status 
-@app.route('/status', methods=['GET'])
-def get_pump():
-    update_status()
-    return status
-
-
 # turn on or off the pump manually
 @app.route('/pump/<toggle>')
 def set_pump(toggle):
-    main.set_pump(toggle)    # toggle = "ON" or "OFF"
+    status['auto_mode'] = 'OFF'     # turn off the auto mode
+    
+    main.set_pump(toggle)           # toggle = "ON" or "OFF"
     update_status()
+    
     return render_template('index.html', **status)
 
+
+# turn on or off the auto mode
+@app.route('/auto/<toggle>')
+def set_pump(toggle):
+    
+    running = False
+    if toggle == "ON":
+        for process in psutil.process_iter():
+            try:
+                if process.cmdline()[1] == 'auto_water.py':
+                    running = True
+            except:
+                pass
+        if not running:
+            os.system("python3 auto_water.py&")
+    else:
+        os.system("pkill -f water.py")
+
+    update_status()
+    return render_template('index.html', **status)
 
 
 def update_status():

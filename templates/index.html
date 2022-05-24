@@ -17,14 +17,6 @@
     
     <hr>
 
-    <!-- <form action="http://localhost:5000/pump" method="post">
-        Pump:
-
-        <label class="switch">
-            <input type="checkbox" name="cb1" class="off-on">
-            <span class="slider"></span>
-        </label>
-    </form> -->
 
     <a href="/pump/ON"><button>Turn ON Watering</button></a>
     <a href="/pump/OFF"><button>Turn OFF Watering</button></a>
@@ -33,17 +25,13 @@
     
     Irrigation: {{pump}} <br><br>
     Soil: {{moisture}}
-    <!-- <span id="pumpState"></span> -->
     <br><br>
     
     <hr>
 
     Automatic mode:
-    <label class="switch">
-        <input type="checkbox" name="cb2" class="auto">
-        <span class="slider"></span>
-    </label>
-    <p><i>not working yet</i></p> 
+    <a href="/auto/ON"><button>Turn ON Auto Watering</button></a>
+    <a href="/auto/OFF"><button>Turn OFF Auto Watering</button></a>
 
 
 </body>
