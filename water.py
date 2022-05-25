@@ -6,23 +6,24 @@ import time
 
 init = False
 
-GPIO.setmode(GPIO.BOARD) # Broadcom pin-numbering scheme
+GPIO.setmode(GPIO.BOARD)
 
-def get_last_watered():
+def init_output(pin):
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, GPIO.LOW)
+    GPIO.output(pin, GPIO.HIGH)
+
+def get_last_irrigation():
     try:
         f = open("last_watered.txt", "r")
         return f.readline()
     except:
         return "NEVER!"
       
-def get_status(pin = 11):
+def get_moisture(pin = 11):
     GPIO.setup(pin, GPIO.IN) 
     return GPIO.input(pin)
 
-def init_output(pin):
-    GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
-    GPIO.output(pin, GPIO.HIGH)
     
 def auto_water(delay = 5, pump_pin = 7, water_sensor_pin = 11):
     consecutive_water_count = 0
@@ -31,7 +32,7 @@ def auto_water(delay = 5, pump_pin = 7, water_sensor_pin = 11):
     try:
         while 1 and consecutive_water_count < 10:
             time.sleep(delay)
-            wet = get_status(pin = water_sensor_pin) == 0
+            wet = get_moisture(pin = water_sensor_pin) == 0
             if not wet:
                 if consecutive_water_count < 5:
                     pump_on(pump_pin, 1)
@@ -55,7 +56,3 @@ def pump_on(pump_pin = 7, delay = 1):
     GPIO.output(pump_pin, GPIO.LOW)
     time.sleep(1)
     GPIO.output(pump_pin, GPIO.HIGH)
-
-
-def clean_up():
-    GPIO.cleanup()

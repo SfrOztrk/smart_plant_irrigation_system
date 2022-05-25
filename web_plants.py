@@ -6,63 +6,73 @@ import os
 
 app = Flask(__name__)
 
-def template(title = "HELLO!", text = ""):
-    now = datetime.datetime.now()
-    timeString = now
-    templateDate = {
-        'title' : title,
-        'time' : timeString,
-        'text' : text
+status = {
+        'time_now' : datetime.datetime.now().strftime("%d %b %Y %X"),
+        'text' : '',
+        'time_watered' : water.get_last_irrigation(),
+        'auto_mode' : 'OFF'
         }
-    return templateDate
+
+def update_status(text = "", auto = ""):
+    now = datetime.datetime.now()
+
+    status = {
+        'time_now' : now.strftime("%d %b %Y %X"),
+        'text' : text,
+        'time_watered' : water.get_last_irrigation(),
+        'auto_mode' : auto
+        }
+
+    return status
+
 
 @app.route("/")
 def hello():
-    templateData = template()
-    return render_template('main.html', **templateData)
+    status = update_status()
+    return render_template('main.html', **status)
 
-@app.route("/last_watered")
-def check_last_watered():
-    templateData = template(text = water.get_last_watered())
-    return render_template('main.html', **templateData)
 
 @app.route("/sensor")
 def action():
-    status = water.get_status()
+    moisture_value = water.get_moisture()
+    
     message = ""
-    if (status == 1):
+    if (moisture_value == 1):
         message = "Water me please!"
     else:
         message = "I'm a happy plant"
 
-    templateData = template(text = message)
-    return render_template('main.html', **templateData)
+    status = update_status(text = message)
+    return render_template('main.html', **status)
 
 @app.route("/water")
 def action2():
     water.pump_on()
-    templateData = template(text = "Watered Once")
-    return render_template('main.html', **templateData)
+    status = update_status(text = "Watered Once")
+    return render_template('main.html', **status)
 
 @app.route("/auto/water/<toggle>")
 def auto_water(toggle):
     running = False
     if toggle == "ON":
-        templateData = template(text = "Auto Watering On")
+        status = update_status(text = "Auto Watering is Enabled", auto = 'ON')
+        
         for process in psutil.process_iter():
             try:
                 if process.cmdline()[1] == 'auto_water.py':
-                    templateData = template(text = "Already running")
+                    status = update_status(text = "Already running")
                     running = True
             except:
                 pass
         if not running:
             os.system("python3 auto_water.py&")
     else:
-        templateData = template(text = "Auto Watering Off")
+        status = update_status(text = "Auto Watering is Disabled", auto = 'OFF')
         os.system("pkill -f water.py")
 
-    return render_template('main.html', **templateData)
+    return render_template('main.html', **status)
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
