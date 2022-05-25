@@ -57,7 +57,7 @@ def auto_water(toggle):
             except:
                 pass
         if not running:
-            os.system("python3.4 auto_water.py&")
+            os.system("python3 auto_water.py&")
     else:
         templateData = template(text = "Auto Watering Off")
         os.system("pkill -f water.py")
