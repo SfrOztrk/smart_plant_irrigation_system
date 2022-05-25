@@ -7,17 +7,17 @@ import os
 app = Flask(__name__)
 
 status = {
-        'time_now' : datetime.datetime.now().strftime(" %d %b %Y  %X"),
+        'time_now' : datetime.datetime.now().strftime("%d %b %Y, %X"),
         'text' : '',
         'time_watered' : water.get_last_irrigation(),
         'auto_mode' : 'OFF'
         }
 
-def update_status(text = "", auto = ""):
+def update_status(text = "", auto = status['auto_mode']):
     now = datetime.datetime.now()
 
     status = {
-        'time_now' : now.strftime("%d %b %Y %X"),
+        'time_now' : now.strftime("%d %b %Y, %X"),
         'text' : text,
         'time_watered' : water.get_last_irrigation(),
         'auto_mode' : auto
@@ -38,9 +38,9 @@ def action():
     
     message = ""
     if (moisture_value == 1):
-        message = "Water me please!"
+        message = "Soil is dry, need water!"
     else:
-        message = "I'm a happy plant"
+        message = "Soil is wet!"
 
     status = update_status(text = message)
     return render_template('main.html', **status)
