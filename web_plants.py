@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 status = {
-        'time_now' : datetime.datetime.now().strftime("%d %b %Y %X"),
+        'time_now' : datetime.datetime.now().strftime(" %d %b %Y  %X"),
         'text' : '',
         'time_watered' : water.get_last_irrigation(),
         'auto_mode' : 'OFF'
