@@ -38,9 +38,13 @@ def auto_water(delay = 5, pump_pin = 7, water_sensor_pin = 11):
                 consecutive_water_count += 1
             else:
                 consecutive_water_count = 0
+    
     except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
+        GPIO.output(pump_pin, GPIO.LOW)
         GPIO.cleanup() # cleanup all GPI
+    
     finally:
+        GPIO.output(pump_pin, GPIO.LOW)
         GPIO.cleanup()
 
 def pump_on(pump_pin = 7, delay = 1):
