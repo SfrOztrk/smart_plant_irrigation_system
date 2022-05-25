@@ -26,19 +26,20 @@ def get_moisture(pin = 11):
 
     
 def auto_water(delay = 5, pump_pin = 7, water_sensor_pin = 11):
-    consecutive_water_count = 0
+    counter = 0     # for safety
     init_output(pump_pin)
     print("Here we go! Press CTRL+C to exit")
+
     try:
-        while 1 and consecutive_water_count < 10:
+        while counter < 10:
             time.sleep(delay)
-            wet = get_moisture(pin = water_sensor_pin) == 0
-            if not wet:
-                if consecutive_water_count < 5:
-                    pump_on(pump_pin, 1)
-                consecutive_water_count += 1
+
+            if get_moisture(pin = water_sensor_pin) == 1:   # dry
+                if counter < 5:
+                    pump_on(pump_pin)
+                counter += 1
             else:
-                consecutive_water_count = 0
+                counter = 0
     
     except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
         GPIO.output(pump_pin, GPIO.LOW)
