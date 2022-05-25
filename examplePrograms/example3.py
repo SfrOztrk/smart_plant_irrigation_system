@@ -34,7 +34,7 @@ def irrigation(delay):
 	try:
 		while True:
 
-			if get_moisture_status() == 0:
+			if get_moisture_status() == 'DRY':
 				set_pump('ON')
 				print("The soil is dry. The water pump started to pump water!")
 			else:
