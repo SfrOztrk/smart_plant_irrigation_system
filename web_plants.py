@@ -10,17 +10,15 @@ status = {
         'time_now' : datetime.datetime.now().strftime("%d %b %Y, %X"),
         'text' : '',
         'time_watered' : water.get_last_irrigation(),
-        'auto_mode' : 'OFF'
         }
 
-def update_status(text = "", auto = status['auto_mode']):
+def update_status(text = ""):
     now = datetime.datetime.now()
 
     status = {
         'time_now' : now.strftime("%d %b %Y, %X"),
         'text' : text,
-        'time_watered' : water.get_last_irrigation(),
-        'auto_mode' : auto
+        'time_watered' : water.get_last_irrigation()
         }
 
     return status
@@ -55,7 +53,7 @@ def action2():
 def auto_water(toggle):
     running = False
     if toggle == "ON":
-        status = update_status(text = "Auto Watering is Enabled", auto = 'ON')
+        status = update_status(text = "Smart Irrigation is Enabled")
         
         for process in psutil.process_iter():
             try:
@@ -67,7 +65,7 @@ def auto_water(toggle):
         if not running:
             os.system("python3 auto_water.py&")
     else:
-        status = update_status(text = "Auto Watering is Disabled", auto = 'OFF')
+        status = update_status(text = "Smart Irrigation is Disabled")
         os.system("pkill -f water.py")
 
     return render_template('main.html', **status)
