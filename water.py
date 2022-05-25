@@ -51,7 +51,7 @@ def auto_water(delay = 5, pump_pin = 7, water_sensor_pin = 11):
 def pump_on(pump_pin = 7, delay = 1):
     init_output(pump_pin)
     f = open("last_watered.txt", "w")
-    f.write("Last watered {}".format(datetime.datetime.now()))
+    f.write("{}".format(datetime.datetime.now().strftime("%d %b %Y %X")))
     f.close()
     GPIO.output(pump_pin, GPIO.LOW)
     time.sleep(1)
