@@ -26,10 +26,10 @@ def get_moisture(pin = 11):
 
     
 def auto_water(delay = 5, pump_pin = 7, water_sensor_pin = 11):
-    counter = 0     # for safety
     init_output(pump_pin)
     print("Here we go! Press CTRL+C to exit")
 
+    counter = 0     # for safety
     try:
         while counter < 10:
             time.sleep(delay)
