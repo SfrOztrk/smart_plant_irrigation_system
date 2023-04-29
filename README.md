@@ -10,7 +10,7 @@ This diagram represents the operation of the system in an automatic setting over
 ![algorithm](https://user-images.githubusercontent.com/73023770/235298109-abb1ce86-fa67-4fb2-a4d7-dfebe6fa0220.jpg)
 
 # Sensors and Devices
-- Rasperry PI 3 B+
+- Raspberry PI 3 B+
 - Soil Moisture Sensor and Module
 - Relay Module
 - 6V Mini Water Pump
