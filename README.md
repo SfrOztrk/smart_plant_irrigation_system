@@ -5,7 +5,7 @@ This project is smart plant irrigation project. This system provides watering pl
 As everyone knows, the human population is growing rapidly and we cannot efficiently consume the resources our earth offers us. With the Smart Plant Irrigation System, we aim to alleviate the burden of responsibility of the people responsible for agriculture, contribute to the rate of usable water on earth by using our water resources efficiently, and be practical in production. 
 
 # Algorithm
-This diagram represents the operation of the system in an automatic setting over the seerver. Apart from this, it is also possible to run it manually on the server. The only difference is that the user determines the start and stop. However, the humidity sensor decides whether it works or stops in the automatic system.
+This diagram represents the operation of the system in an automatic setting over the server. Apart from this, it is also possible to run it manually on the server. The only difference is that the user determines the start and stop. However, the humidity sensor decides whether it works or stops in the automatic system.
 
 ![algorithm](https://user-images.githubusercontent.com/73023770/235298109-abb1ce86-fa67-4fb2-a4d7-dfebe6fa0220.jpg)
 
